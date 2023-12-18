@@ -1,0 +1,44 @@
+<div class="mb-3">
+  <input
+    type="text"
+    class="form-control"
+    name="keywords"
+    [(ngModel)]="keywords"
+  />
+</div>
+<div class="mb-3">
+  <select class="form-select" [(ngModel)]="searchIn">
+    <option value="title">Titolo</option>
+    <option value="description">Descrizione</option>
+    <option value="content">Contenuto</option>
+  </select>
+</div>
+<button
+  type="button"
+  class="btn btn-primary"
+  (click)="search()"
+  [disabled]="this.keywords.trim().length == 0"
+>
+  Cerca
+</button>
+<hr />
+<div class="card mb-3" *ngFor="let n of news">
+  <img
+    [src]="n.urlToImage"
+    class="card-img-top"
+    [alt]="n.title"
+    *ngIf="n.urlToImage"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ n.title }}</h5>
+    <p class="card-text">{{ n.content }}</p>
+    <p class="card-text">
+      <small class="text-body-secondary">{{
+        n.publishedAt | date : "dd/MM/yyyy HH:mm"
+      }}</small>
+    </p>
+    <a [href]="n.url" target="_blank" class="btn btn-primary"
+      >Leggi di più...</a
+    >
+  </div>
+</div>
